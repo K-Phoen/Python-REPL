@@ -17,7 +17,7 @@
 
       checkOptions();
       initWebSocket();
-      connectCommandLine();
+      bindEvents();
 
       return this;
     },
@@ -25,9 +25,9 @@
       executeCommand(cmd);
     },
     destroy: function() {
+      containers.unbind('.interpreter');
       ws.close();
 
-      containers.unbind('.interpreter');
       return this;
     }
   };
@@ -51,7 +51,7 @@
     }
   }
 
-  function connectCommandLine() {
+  function bindEvents() {
     options.cmdLine.bind('change.interpreter', function() {
       executeCommand(options.cmdLine.val());
     });
@@ -63,18 +63,12 @@
     ws = new WebSocket(options.webSocketUrl);
 
     ws.onmessage = onMessage;
-    ws.onclose = onClose;
-    ws.onopen = onOpen;
-  }
-
-  function onOpen() {
-    console.warn('Connected !');
-    options.cmdLine.attr('disabled', false);
-  }
-
-  function onClose() {
-    console.warn('Connection closed');
-    options.cmdLine.attr('disabled', true);
+    ws.onclose = function() {
+      containers.trigger('connectionClosed.interpreter');
+    };
+    ws.onopen = function() {
+      containers.trigger('connectionOpened.interpreter');
+    };
   }
 
   function onMessage(evt) {

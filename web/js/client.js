@@ -11,6 +11,12 @@
     $('#interpreter').interpreter({
       cmdLine: '#cmd',
       webSocketUrl: 'ws://localhost:8080/'
+    })
+    .bind('connectionOpened.interpreter', function() {
+      $('#cmd').attr('disabled', false);
+    })
+    .bind('connectionClosed.interpreter', function() {
+      $('#cmd').attr('disabled', true);
     });
   });
 })(jQuery);

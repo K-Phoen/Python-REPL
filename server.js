@@ -28,8 +28,11 @@ ws.createServer(function(websocket) {
   /**
    * When a new client shows up, create a new python instance to play with.
    */
-  websocket.addListener('connect', function(resource) {
-    python = spawn('python', ['-i', '-u']);
+  websocket.on('connect', function(resource) {
+    // the "-u" option enables the unbuffered mode and the "-i" option forces
+    // the interactive mode.
+    //python = spawn('python2', ['-u', './lib/interpreter.py']);
+    python = spawn('python2', ['-u', '-i']);
 
     python.stdout.on('data', function (data) {
       websocket.write(data);
@@ -51,7 +54,7 @@ ws.createServer(function(websocket) {
    * Send the data received through the websockect connection into the stdin
    * file descriptor.
    */
-  .addListener('data', function(data) {
+  .on('data', function(data) {
     python.stdin.write(data);
     console.log('Received: ' + data);
   })
@@ -59,7 +62,7 @@ ws.createServer(function(websocket) {
   /**
    * Send a SIGTERM signal to the python process when the connection is closed.
    */
-  .addListener('close', function() {
+  .on('close', function() {
     python.kill();
     console.log('Connection closed.');
   });
