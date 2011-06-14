@@ -8,8 +8,8 @@
     }
 
 
-    $('#results').nodePythonInterpreter({
-      cmdLine: $('#cmd'),
+    $('#interpreter').interpreter({
+      cmdLine: '#cmd',
       webSocketUrl: 'ws://localhost:8080/'
     });
   });

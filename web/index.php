@@ -9,8 +9,7 @@
 <body>
 <h1>Results</h1>
 
-<div id="results">
-</div>
+<div id="interpreter"></div>
 
 <p>
   &gt;&gt;&gt; <input id="cmd" type="text" disabled />
