@@ -9,7 +9,16 @@ is done with WebSockets. The server software is Node.js.
 
 ## Install
 
-* Clone the repo : `git clone git://github.com/K-Phoen/Python-REPL.git /home/**USER**/python-repl`
-* Init the submodules : `git submodules update --init`
-* Launch the WebSocket server : `node server.js`
-* Open the main page (python-repl/web/index.php) in a browser and have fun !
+* Clone the repo: `git clone git://github.com/K-Phoen/Python-REPL.git`
+* Init the submodules: `git submodules update --init`
+* Build the daemon.node submodule:
+  * `cd Python-REPL && node-waf configure build`
+  * copy the previously built module to the daemon.node root directory:
+    `cp build/default/daemon.node .`
+  * Go back to the Python-REPL root directory : `cd ../../../`
+* Launch the WebSocket server: `node server.js start`
+* Open the main page (Python-REPL/web/index.html) in a browser and have fun!
+
+## Demo
+
+Coming soon ...

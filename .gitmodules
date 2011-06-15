@@ -1,3 +1,6 @@
 [submodule "lib/vendor/node_ws"]
 	path = lib/vendor/node_ws
 	url = https://github.com/ncr/node.ws.js.git
+[submodule "lib/vendor/node_daemon"]
+	path = lib/vendor/node_daemon
+	url = https://github.com/Slashed/daemon.node.git
