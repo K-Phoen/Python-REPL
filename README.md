@@ -21,4 +21,5 @@ is done with WebSockets. The server software is Node.js.
 
 ## Demo
 
-Coming soon ...
+A [demo](http://kevingomez.fr/Python-REPL/) is available on my server, it's
+running a sandboxed python version but it should be enough to play!
