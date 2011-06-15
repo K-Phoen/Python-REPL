@@ -16,20 +16,37 @@ var PORT      = process.ARGV[3] || 8080,
 
 
 // Handle start/stop commands
+var pid;
+
+// try to determine if the deamon is already running or not.
+try {
+  pid = parseInt(fs.readFileSync(LOCK_FILE));
+} catch (e) { } // an undefined pid means that the server is not running
+
 switch(process.argv[2]) {
 	case 'stop':
-		process.kill(parseInt(fs.readFileSync(LOCK_FILE)));
+    if (isNaN(pid) || pid === undefined) {
+      console.log('Nothing to do: no server is running.');
+    } else {
+  		process.kill(pid);
+    }
+
 		process.exit(0);
 		break;
 
 	case 'start':
-		var dPID = daemon.start();
+    if (!isNaN(pid) && pid !== undefined) {
+      console.log('The server is already running !');
+      process.exit(0);
+    }
+
+		pid = daemon.start();
 		daemon.lock(LOCK_FILE);
 		daemon.closeIO();
 		break;
 
 	default:
-		sys.puts('Usage: [start|stop]');
+		console.log('Usage: [start|stop]');
 		process.exit(0);
 }
 
