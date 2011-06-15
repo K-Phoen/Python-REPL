@@ -12,7 +12,7 @@ is done with WebSockets. The server software is Node.js.
 * Clone the repo: `git clone git://github.com/K-Phoen/Python-REPL.git`
 * Init the submodules: `git submodules update --init`
 * Build the daemon.node submodule:
-  * `cd Python-REPL && node-waf configure build`
+  * `cd Python-REPL/lib/vendor/node_daemon/ && node-waf configure build`
   * copy the previously built module to the daemon.node root directory:
     `cp build/default/daemon.node .`
   * Go back to the Python-REPL root directory : `cd ../../../`
