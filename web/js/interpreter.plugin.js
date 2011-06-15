@@ -56,6 +56,13 @@
       executeCommand(options.cmdLine.val());
     });
 
+    // trigger the 'change' event when pressing 'enter'
+    options.cmdLine.bind('keypress.interpreter', function(event) {
+      if (event.which === 13) { // enter key
+        options.cmdLine.change();
+      }
+    });
+
     containers.bind('commandExecuted.interpreter', onCommandExecuted);
   }
 
