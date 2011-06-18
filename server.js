@@ -95,6 +95,8 @@ ws.createServer(function(websocket) {
    */
   .on('data', function(data) {
     python.stdin.write(data);
+    websocket.write(data);
+
     console.log('Received: ' + data);
   })
 

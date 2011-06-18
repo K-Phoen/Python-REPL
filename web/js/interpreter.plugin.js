@@ -79,14 +79,8 @@
   }
 
   function onMessage(evt) {
-    var data = evt.data;
+    var data = nl2br(evt.data);
 
-    // dirty hack to remove the last '>>> ' from the interpreter output
-    if (data.substring(data.length - 4, data.length) === '>>> ') {
-      data = data.substring(0, data.length - 4);
-    }
-
-    data = nl2br(data);
     containers.each(function() {
       $(this).append(data);
     });
@@ -99,7 +93,7 @@
   }
 
   function onCommandExecuted(event, cmd) {
-      $(event.target).append('&gt;&gt;&gt; ' + nl2br(cmd) + '<br />');
+      //$(event.target).append('&gt;&gt;&gt; ' + nl2br(cmd) + '<br />');
 
     options.cmdLine.val('');
   }
